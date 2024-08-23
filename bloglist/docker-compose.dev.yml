@@ -1,0 +1,30 @@
+services:
+  app:
+    image: bloglist-front-dev
+    build:
+      context: . # The context will pick this directory as the "build context"
+      dockerfile: bloglist-frontend/dev.Dockerfile # This will simply tell which dockerfile to read
+    volumes:
+      - ./bloglist-frontend/:/usr/src/app # The path can be relative, so ./ is enough to say "the same location as the docker-compose.yml"
+    # ports:
+    #   - 5173:5173
+    container_name: bloglist-front-dev # This will name the container 
+  server1:
+    image: bloglist-back-dev
+    build:
+      context: . 
+      dockerfile: bloglist-backend/dev.Dockerfile 
+    volumes:
+        - ./bloglist-backend/:/usr/src/app 
+    # ports:
+    #   - 3000:3000
+    container_name: bloglist-back-dev 
+  nginx:
+    image: nginx:1.20.1
+    volumes:
+      - ./nginx.dev.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - 8080:80
+    container_name: reverse-proxy
+    depends_on:
+      - app # wait for the frontend container to be started
