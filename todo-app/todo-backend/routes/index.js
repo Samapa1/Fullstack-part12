@@ -21,11 +21,7 @@ initializeCounter()
 // Get the number of created todos
 router.get('/statistics', async (_, res) => {
   const added = await getAsync("added_todos")
-  // const added2 = added.then(result => {return result.data})
-  // console.log(added2)
   console.log(added)
-  // res.send(json({added_todos: added }))
-  // res.json({added_todos: added })
   res.send({added_todos: added })
 });
 
