@@ -2,13 +2,13 @@ services:
   app:
     image: todo-front-dev
     build:
-      context: ./todo-frontend/ # The context will pick this directory as the "build context"
-      dockerfile: dev.Dockerfile # This will simply tell which dockerfile to read
+      context: ./todo-frontend/ 
+      dockerfile: dev.Dockerfile 
     volumes:
-      - ./todo-frontend/:/usr/src/app # The path can be relative, so ./ is enough to say "the same location as the docker-compose.yml"
+      - ./todo-frontend/:/usr/src/app 
     # ports:
     #   - 5173:5173
-    container_name: todo-front-dev # This will name the container 
+    container_name: todo-front-dev 
   server1:
     image: todo-back-dev
     build:
@@ -50,7 +50,5 @@ services:
       - 8080:80
     container_name: reverse-proxy-tododev
     depends_on:
-      - app # wait for the frontend container to be started
+      - app 
 
-
-  #  REDIS_URL=redis://localhost:6379 MONGO_URL=mongodb://the_username:the_password@localhost:3456/the_database npm run dev
